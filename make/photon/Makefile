@@ -279,7 +279,7 @@ define _build_base
 		if [ "$(1)" = "db" ] && [ "$(BUILD_PG96)" = "true" ]; then \
 			echo "build pg96 rpm package." ; \
 			cd $(DOCKERFILEPATH)/db && $(DOCKERFILEPATH)/db/rpm_builder.sh && cd - ; \
-			$(DOCKERBUILD) --pull --no-cache -f $(DOCKERFILEPATH)/db/Dockerfile.pg96 -t $(BASEIMAGENAMESPACE)/harbor-db-base:$(BASEIMAGETAG) --label base-build-date=$(TIMESTAMP) . ; \
+			$(DOCKERBUILD) --no-cache -f $(DOCKERFILEPATH)/db/Dockerfile.pg96 -t $(BASEIMAGENAMESPACE)/harbor-db-base:$(BASEIMAGETAG) --label base-build-date=$(TIMESTAMP) . ; \
 		else \
 			$(DOCKERBUILD) -f $(2)/Dockerfile.base -t $(BASEIMAGENAMESPACE)/harbor-$(1)-base:$(BASEIMAGETAG) --label base-build-date=$(TIMESTAMP) . ;\
 		fi ;\

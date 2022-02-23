@@ -82,7 +82,7 @@ DEVFLAG=true
 NOTARYFLAG=false
 TRIVYFLAG=false
 HTTPPROXY=
-BUILDBIN=false
+BUILDBIN=true
 NPM_REGISTRY=https://registry.npmjs.org
 # enable/disable chart repo supporting
 CHARTFLAG=false
@@ -99,7 +99,7 @@ BASEIMAGETAG=dev
 BUILDBASETARGET=chartserver trivy-adapter core db jobservice log nginx notary-server notary-signer portal prepare redis registry registryctl exporter
 BASEIMAGENAMESPACE=goharbor
 # #input true/false only
-PULL_BASE_FROM_DOCKERHUB=true
+PULL_BASE_FROM_DOCKERHUB=false
 
 # for harbor package name
 PKGVERSIONTAG=dev
@@ -339,7 +339,7 @@ define swagger_generate_server
 	@$(SWAGGER_GENERATE_SERVER) -f $(1) -A $(3) --target $(2)
 endef
 
-gen_apis: lint_apis
+gen_apis:
 	$(call prepare_docker_image,${SWAGGER_IMAGENAME},${SWAGGER_VERSION},${SWAGGER_IMAGE_BUILD_CMD})
 	$(call swagger_generate_server,api/v2.0/swagger.yaml,src/server/v2.0,harbor)
 
